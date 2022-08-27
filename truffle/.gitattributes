@@ -1,0 +1,7 @@
+@types/generated/**/* linguist-generated=true
+*.sol linguist-language=Solidity
+*.tsx linguist-detectable=false
+*.ts linguist-detectable=false
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.js linguist-detectable=false

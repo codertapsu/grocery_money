@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+coverage/
+coverage.json
+.coverage_contracts/
+.coverage_artifacts/
+
+
+# truffle
+build
+
+# typechain
+types
+
+# buidler
+artifacts
+cache
