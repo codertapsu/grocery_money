@@ -7,18 +7,20 @@
     "test": "test"
   },
   "scripts": {
-    "compile": "rm -rf './build' && truffle compile",
+    "clean": "rm -rf './build' && rm -rf './types'",
+    "compile": "truffle compile",
     "migrate": "truffle migrate",
     "compile:migrate": "tsc -p ./tsconfig.migrate.json --outDir migrations",
-    "generate-types": "npm run compile && rm -rf './types' && npx typechain --target=truffle-v5 'build/contracts/*.json'",
-    "generate-types-client": "typechain --target=web3-v1 './build/contracts/*.json'",
+    "generate-types": "npx typechain --target=truffle-v5 'build/contracts/*.json' && npx typechain --target=web3-v1 './build/contracts/*.json'",
+    "develop": "npm run clean && npm run compile && npm run generate-types && npm run compile:migrate",
     "coverage": "truffle run coverage",
     "typecheck": "tsc --noEmit",
-    "ganache": "ganache --wallet.deterministic --wallet.totalAccounts=10 --wallet.defaultBalance=1000 --logging.quiet"
+    "ganache": "ganache"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
     "@truffle/hdwallet-provider": "^2.0.14",
     "@typechain/truffle-v5": "^8.0.1",
     "@typechain/web3-v1": "^6.0.1",
@@ -42,6 +44,7 @@
     "ganache": "^7.4.1",
     "prettier": "^2.7.1",
     "prettier-plugin-solidity": "^1.0.0-beta.24",
+    "solc": "^0.8.16",
     "solidity-coverage": "^0.7.21",
     "truffle": "^5.5.28",
     "ts-node": "^10.9.1",

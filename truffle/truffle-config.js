@@ -40,18 +40,18 @@
  *
  * https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard/
  */
-process.env.TS_NODE_FILES = 'true';
-require('ts-node/register/transpile-only');
+process.env.TS_NODE_FILES = "true";
+require("ts-node/register/transpile-only");
 // Fix Typescript callsite reporting
-Object.defineProperty(Error, 'prepareStackTrace', { writable: false });
-require('ts-node').register({
+Object.defineProperty(Error, "prepareStackTrace", { writable: false });
+require("ts-node").register({
   files: true,
 });
 
 // require('dotenv').config();
 const { MNEMONIC, PROJECT_ID } = process.env;
 
-const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 const MetaMaskAccountIndex = 0;
 
 module.exports = {
@@ -73,19 +73,25 @@ module.exports = {
     // options below to some value.
     //
     development: {
-      host: 'localhost', // Localhost (default: none)
-      port: 8545, // Standard Ethereum port (default: none)
-      network_id: '*', // Any network (default: none)
-      ganache_local: {
-        provider: function () {
-          return new HDWalletProvider(
-            MNEMONIC,
-            "http://127.0.0.1:8545",
-            MetaMaskAccountIndex
-          );
-        },
-        network_id: 5777,
-      },
+      host: "http://127.0.0.1", // Localhost (default: none)
+      port: 7545, // Standard Ethereum port (default: none)
+      network_id: "*", // Any network (default: none)
+      accounts: 10,
+      defaultEtherBalance: 500,
+      /**
+       * By default the owner is accounts[0] so the first account on the list but you can set the owner by adding "from"
+       * from: "0xda9b1a939350dc7198165ff84c43ce77a723ef73",
+       */
+      // ganache_local: {
+      //   provider: function () {
+      //     return new HDWalletProvider(
+      //       MNEMONIC,
+      //       "http://127.0.0.1:7545",
+      //       MetaMaskAccountIndex
+      //     );
+      //   },
+      //   network_id: 5777,
+      // },
     },
     //
     // An additional network, but with some advanced options…
@@ -107,6 +113,18 @@ module.exports = {
     //   timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
     //   skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     // },
+    /**
+     * {@link https://www.rinkeby.io}
+     * {@link https://www.alchemy.com/overviews/rinkeby-testnet}
+     */
+    rinkeby: {
+      provider: () =>
+        new HDWalletProvider(
+          mnemonic,
+          `https://rinkeby.infura.io/v3/287e918ce0694a139b02750cecf105b3`
+        ),
+      network_id: 4, // rinkeby's id
+    },
     //
     // Useful for private networks
     // private: {
@@ -124,7 +142,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: '0.8.16', // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.8.16", // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
@@ -156,5 +174,5 @@ module.exports = {
   //     }
   //   }
   // },
-  plugins: ['solidity-coverage'],
+  plugins: ["solidity-coverage"],
 };
