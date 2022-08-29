@@ -73,25 +73,25 @@ module.exports = {
     // options below to some value.
     //
     development: {
-      host: "http://127.0.0.1", // Localhost (default: none)
+      host: "127.0.0.1", // Localhost (default: none)
       port: 7545, // Standard Ethereum port (default: none)
       network_id: "*", // Any network (default: none)
-      accounts: 10,
-      defaultEtherBalance: 500,
+      // accounts: 20,
+      // defaultEtherBalance: 2000,
       /**
        * By default the owner is accounts[0] so the first account on the list but you can set the owner by adding "from"
        * from: "0xda9b1a939350dc7198165ff84c43ce77a723ef73",
        */
-      // ganache_local: {
-      //   provider: function () {
-      //     return new HDWalletProvider(
-      //       MNEMONIC,
-      //       "http://127.0.0.1:7545",
-      //       MetaMaskAccountIndex
-      //     );
-      //   },
-      //   network_id: 5777,
-      // },
+      ganache_local: {
+        provider: function () {
+          return new HDWalletProvider(
+            MNEMONIC,
+            "http://192.168.1.8:7545",
+            MetaMaskAccountIndex
+          );
+        },
+        network_id: 5777,
+      },
     },
     //
     // An additional network, but with some advanced options…
